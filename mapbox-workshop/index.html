@@ -26,9 +26,33 @@
          //	'mapbox://styles/mapbox/outdoors-v10'  
          //	'mapbox://styles/mapbox/satellite-v10' 
          //	'mapbox://styles/mapbox/traffic-night-v2'
-         center: [-78.6382, 35.7796], // change starting position to coordinates associated w/ your data.
+         center: [-78.644257, 35.787743], // starting position
          zoom: 6 // starting zoom
          });
+		 map.on('load', function() {
+
+   map.addSource('jesup_mask', {
+       type: 'geojson',
+       data: 'https://raw.githubusercontent.com/mmamanat/gis741/master/rasters/jesup_vect'
+   });
+
+map.addLayer({
+       'id': 'jesup mask',
+       "type": "fill",
+       "source": "jesup_mask",
+       'layout': {},
+       'paint': {
+           'fill-color': {
+             property: 'value',
+             type: 'exponential',
+             stops: [
+             [1, '#FFEC2A']
+             ],
+           },
+           'fill-opacity': 0.5
+       }
+   });
+});
       </script>
    </body>
 </html>
